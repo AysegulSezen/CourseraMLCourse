@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun May 31 19:54:35 2020
-
+Convert Andrew Ng homework Ex4 to python from octave. 
 @author: aysegulsezen
 """
 import scipy.io
