@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Dec 10 19:39:00 2020
-Homework Andrew Ng Ex6 SVM
+Homework Andrew Ng Ex6 SVM. Converted from octave to python.
 @author: aysegulsezen
 """
 
