@@ -124,6 +124,7 @@ def Ex6_SVM_Spam():
     print('Test Accuracy:', acc);
     
     ##############-5-
+    # Making decision for which svm parameter is equal weight of words ( in octave homework model.w )
     #print('model.class_weight_:',model.class_weight_)
     #print('model.classes_',model.classes_)
     print('model.coef_',model.coef_)
