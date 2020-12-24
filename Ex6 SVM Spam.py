@@ -134,9 +134,8 @@ def Ex6_SVM_Spam():
     #print('model.n_support_',model.n_support_)
     #print('model.shape_fit_',model.shape_fit_)
     
-    #df=DataFrame()  kolonları idx weight word olacak. vocabListten de kelimeler alınıp sort edilecek.
     vocabList = getVocabList();
-    weight=model.coef_[0]
+    weight=model.coef_[0]  # is equal model.w ; weights of 1899 words.
     vocabList['weight']=weight  # adding weight value of every word after svm
     print('Top predictors of spam:',vocabList.sort_values(by=['weight'],ascending=False)  )
 
