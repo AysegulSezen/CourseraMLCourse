@@ -2,7 +2,7 @@
 Converted from octave to python Andrew Ng homework project.
 ( https://www.coursera.org/learn/machine-learning/home/welcome )
 
- 1- DigitRecognation.py:  Handwritten Digit Recognition - Logistic Reg
+ 1- DigitRecognation.py:  Handwritten Digit Recognition - Logistic Reg<br/>
  2- ex4 NN.py:            Handwritten Digit Recognition - Neural Network
  3- Ex6_SVM.py:           SVM Alg.
  4- Ex6_SVM_Spam.py:      Classification Spam email by SVM Alg.
