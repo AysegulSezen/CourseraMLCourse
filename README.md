@@ -1,5 +1,4 @@
 # asezen
-
 Converted from octave to python Andrew Ng homework project.
 ( https://www.coursera.org/learn/machine-learning/home/welcome )
 
@@ -9,4 +8,6 @@ Converted from octave to python Andrew Ng homework project.
  4- Ex6_SVM_Spam.py:      Classification Spam email by SVM Alg.
  5- Ex7_Kmeans.py:        To compress an image by Kmeans Alg.
  6- Ex7_Kmeans_PCA.py:    Dimension reduction face dataset.- PCA
+ 7- Ex8_AnomalyDetection.py: Anomaly Detection
+ 8- Ex8_cofi.pu:          Recommender system
 
