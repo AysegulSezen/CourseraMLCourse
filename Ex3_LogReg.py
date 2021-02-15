@@ -11,6 +11,9 @@ import numpy as np
 import skimage.io as io 
 import math 
 import scipy.optimize as op 
+from PIL import Image
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 
 def  displayData(X, example_width):
 
@@ -70,7 +73,7 @@ def lrCostFunction(theta, X, y, lambd):
     J= np.sum(((-y * np.log(predictions) - (1 - y) * np.log(1 - predictions))/m ) )+ lambdaSumC;
     
     lambdaSumG = lambd/m * theta;  
-    grad= (1/m * np.dot( X.transpose() , ( np.array([x - y for x, y in zip(predictions, y)]) ))) 
+    grad= (1/m * np.dot( X.transpose() , ( np.array([x - y for x, y in zip(predictions, y)]) ))) +lambdaSumG 
     grad[0,0] = grad[0,0]-lambdaSumG[0];
     grad=np.concatenate(grad)
 
@@ -99,7 +102,10 @@ def gradFunction(theta, X, y, lambd):
     J= np.sum(((-y * np.log(predictions) - (1 - y) * np.log(1 - predictions))/m ) )+ lambdaSumC;
     
     lambdaSumG = lambd/m * theta;  
-    grad= (1/m * np.dot( X.transpose() , ( np.array([x - y for x, y in zip(predictions, y)]) ))) 
+    grad= (1/m * np.dot( X.transpose() , ( np.array([x - y for x, y in zip(predictions, y)]) ))) #+lambdaSumG
+    #print('grad:',grad.shape)
+    #print('lSG:',lambdaSumG[1:5])
+    grad= ( np.array([x + y for x, y in zip(grad, lambdaSumG)]) )   #grad + lambdaSumG
     #grad[0,0] = grad[0,0]-lambdaSumG[0];
     grad=np.concatenate(grad)
     return grad
@@ -209,6 +215,27 @@ def Ex3_LogReg():
     print('pred:',pred[4500:4505], ' real:',mat['y'][4500:4505])
 
     print('Training Set Accuracy:', np.mean(np.double(np.where(pred == y,1,0))) * 100);
+    
+    ###############-5- out of homework. my handwritten digit pic
+    img1 = Image.open('IMG_6815.jpg') 
+    img2=img1.resize((20,20)) 
+    pix = np.array(img2)
+    #print('img2:',img2.size)
+    imgArr=pix[:,:,1]
+    imgArr=imgArr/255
+    imgArr=imgArr.reshape(1,400)
+    predMy = predictOneVsAll(all_theta, imgArr);
+    print('prediction of my handwrite pict (4):',predMy)
+    
+    ###############-6- out of homework. Doing same job by python class
+    print('Doing same job by python class')
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    model = LogisticRegression(solver='liblinear', random_state=0).fit(X_train, y_train.ravel())
+    pred_test=model.predict(X_test)
+    print('Accuracy of logistic regression classifier on test set: {:.2f}'.format(model.score(X_test, y_test)))
+    
+    pred=model.predict(X[1].reshape(1, -1))  # os_data_y.values.ravel()
+    print('Python class prediction for image1 (image is 0):',np.mod(pred, 10))    
     
 Ex3_LogReg()
 
