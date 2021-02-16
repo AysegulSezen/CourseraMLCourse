@@ -10,7 +10,7 @@ Training data or other documents that were using on code added (generally mat fi
 
 Thank you very much Dr. Andrew Ng for this excellent course and its materials.
 
-**-Files-**
+**-Files-**<br/>
  1- Ex1_LinearReg.py:      Linear Regression<br/>
  2- Ex3_LogReg.py:         Handwritten Digit Recognition - Logistic Regression<br/>
  3- Ex3_LogReg_NN.py:      Handwritten Digit Recognition - Neural Network Parameter<br/>
