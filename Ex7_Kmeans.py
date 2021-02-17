@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Created on Mon Dec 28 12:17:34 2020
 Homework of Andrew Ng. Converted from Octave to Python. Kmeans algorithm.
@@ -10,6 +12,7 @@ import scipy.io
 import numpy as np
 import matplotlib.pyplot as plt
 import skimage.io as io 
+from sklearn.cluster import KMeans
 
 
 def findClosestCentroids(X, centroids):
@@ -141,8 +144,10 @@ def ex7_Kmeans():  # main function
     ##############-5-
     
     print('Applying K-Means to compress an image.');
-
+    #print('centroids:',centroids)
     idx1 = findClosestCentroids(X, centroids);
+    #print('idx1:',idx1[0:10])
+    #print('idx1 sh:',idx1.shape)
 
     X_recovered=[]#np.zeros(shape=(idx1.shape[0]))  # 16384 e 3 olması lazım
     for i in range(0,idx1.shape[0]): # 16384
@@ -159,7 +164,37 @@ def ex7_Kmeans():  # main function
     #io.title('Compressed, with',K,'colors.') 
     io.imshow(X_recovered)#imagesc(X_recovered)   
     io.show()
+    
+    ###############-6- out of homework. Doing same job by python class
+    print('Image compression by K-means (sklearn) python class..')
+    kmeans = KMeans(
+        init="random",
+        n_clusters=K, 
+        n_init=10,
+        max_iter=max_iters,
+        random_state=42
+    )
+    
+    kmeans.fit(X) # X : pixels of image.
+    
+    print('kmeans.inertia_:',kmeans.inertia_)
+    print('kmeans.cluster_centers_:',kmeans.cluster_centers_) # this is same with centroids variable on up.
+    print('kmeans.n_iter_:',kmeans.n_iter_)
+    print('kmeans.labels_[:5]',kmeans.labels_[:10])
+    print('kmeans.labels_:',kmeans.labels_.shape)
+    
+    y_kmeans = kmeans.predict(X)   # y_kmeans is same with idx1 variable on up. 
+    
+    print('y_kmeans:',y_kmeans.shape)
+    print('y_kmeans 0-10:',y_kmeans[0:10])
+    
+    X_recovered2=[]
+    for i in range(0,y_kmeans.shape[0]): # 16384
+        X_recovered2.append(kmeans.cluster_centers_[int(y_kmeans[i])])
+   
+    X_recovered2 = np.reshape(X_recovered2, (img_size[0], img_size[1],3));
+    io.imshow(X_recovered2)  
+    io.show()
         
     
 ex7_Kmeans()
-
